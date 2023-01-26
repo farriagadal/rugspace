@@ -8,6 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <FacebookPixelWithNoSSR />
+      <Header />
       <Transition>
         <Component {...pageProps} />
       </Transition>

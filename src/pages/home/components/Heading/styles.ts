@@ -1,17 +1,33 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  color: white;
-  //
+  color: var(--color-3);  //
   position: relative;
-  margin-top: 175px;
-  background: linear-gradient(100.79deg, var(--color-2) 6.96%, var(--color-1) 98.01%);
-  max-width: calc(100vw - ((100vw - var(--container-width)) / 2));
-  margin-left: calc((100vw - var(--container-width)) / 2);
+  /* background: linear-gradient(100.79deg, var(--color-2) 6.96%, var(--color-1) 98.01%); */
+  background-image: url('/images/graficos.jpg');
+  max-width: var(--container-width);
+  margin: auto;
+  margin-top: 120px;
+  height: 650px;
   padding-top: 92px;
   padding-left: 100px;
   padding-bottom: 80px;
   border-top-left-radius: 125px;
+  border-bottom-right-radius: 125px;
+
+  &:before {
+    content: '';
+    top: -2px;
+    left: -2px;
+    position: absolute;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    background: linear-gradient(127deg,#0d0b20 37.96%,#00000038 119.01%);
+    opacity: 0.9;
+    border-top-left-radius: 125px;
+    border-bottom-right-radius: 125px;
+
+  }
 
   @media only screen and (max-width: 765px) {
     padding-top: 78px;
@@ -35,11 +51,13 @@ export const Container = styled.div`
   }
 
   h1 {
-    margin-top: 38px;
+    margin-top: 85px;
     margin-bottom: 40px;
     max-width: 565px;
     font-size: 80px;
     line-height: 100%;
+    overflow-wrap: anywhere;
+    font-size: 57px;
 
     @media only screen and (max-width: 765px) {
       padding-right: 20px;
@@ -57,14 +75,16 @@ export const Container = styled.div`
     font-size: 14px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #cba622;
+    color: #ffc700;
     display: flex;
     white-space: nowrap;
+    z-index: 1;
+    position: inherit;
 
     &::after {
       content: '';
       width: 100%;
-      border-bottom: solid 1px #cba622;
+      border-bottom: solid 1px #ffc700;
       margin-bottom: 8px;
       margin-left: 32px;
     }
