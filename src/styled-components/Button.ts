@@ -3,7 +3,8 @@ import styled from 'styled-components'
 type ButtonProps = {
   primary?: boolean,
   secondary?: boolean,
-  tertiary?: boolean
+  tertiary?: boolean,
+  disabled?: boolean,
 }
 
 const getButtonData = ({ primary, secondary, tertiary }: ButtonProps) => {
@@ -70,6 +71,9 @@ export default styled.button<ButtonProps>`
   text-transform: uppercase;
   color: ${props => getButtonData(props)?.color};
   font-weight: ${props => getButtonData(props)?.fontWeight};
+  pointer-events: ${props => props.disabled ? 'none' : 'auto'};
+  cursor: ${props => props.disabled ? 'none' : 'pointer'};
+  filter: ${props => props.disabled ? 'brightness(0.4) grayscale(1)' : 'none'};
 
   &:hover {
     background: ${props => getButtonData(props)?.hover.background};

@@ -6,10 +6,14 @@ import Loading from 'src/components/Loading'
 import Button from 'src/styled-components/Button'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import ReplayIcon from '@mui/icons-material/Replay'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUrl } from 'src/store/slices/image'
+
 
 const UploadImage = () => {
-
-  const [image, setImage] = useState('')
+  const imageUpload = useSelector((state: any) => state.image)
+  const dispatch = useDispatch()
+  const [image, setImage] = useState(imageUpload.url || '')
   // const [image
   const [loading, setLoading] = useState(false)
 
@@ -35,7 +39,9 @@ const UploadImage = () => {
         },
       }
     )
+    
     setImage(res.data?.secure_url)
+    dispatch(setUrl(res.data?.secure_url))
     setTimeout(() => {
       setLoading(false)
     }, 3000)
