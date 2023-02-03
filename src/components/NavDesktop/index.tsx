@@ -27,7 +27,7 @@ const NavDesktop = () => {
               <Image src='/icons/logo.svg' alt="SeedLab Logo" width={145} height={146} />
             </Link>
             <Link href="/" className="short-logo">
-              <Image src='/icons/short-logo.svg' alt="SeedLab Logo" width={133} height={19} />
+              <Image src='/icons/logo.svg' alt="SeedLab Logo" width={133} height={19} />
             </Link>
             <Link href="/" className="short-logo-black">
               <Image src='/icons/short-logo-black.svg' alt="SeedLab Logo" width={133} height={19} />

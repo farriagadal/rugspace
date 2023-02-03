@@ -6,7 +6,8 @@ type ContainerProps = {
 
 export const Container = styled.li<ContainerProps>`
   padding: 60px;
-  background: var(--color-2);
+  background: var(--color-1);
+  box-shadow: 0px 30px 100px rgb(164 160 171 / 16%);
   border-radius: 30px 0px;
   font-family: 'Nunito';
   font-weight: 700;

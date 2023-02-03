@@ -1,11 +1,16 @@
 import styled from 'styled-components'
 
-export default styled.div`
+type ButtonProps = {
+  primary?: boolean
+}
+
+export default styled.button<ButtonProps>`
   margin-top: 35px;
-  background: var(--color-1);
+  background: ${props => props.primary ? 'var(--color-2)' : 'var(--color-1)'};
   border: 1px solid var(--color-2);
   border-radius: 20px 0px;
-  width: 214px;
+  min-width: 240px;
+  padding: 0 30px;
   height: 58px;
   display: flex;
   align-items: center;
@@ -19,7 +24,12 @@ export default styled.div`
   cursor: pointer;
   text-transform: uppercase;
 
+  color: ${props => props.primary ? 'var(--color-1)' : 'white'};
+  font-weight: ${props => props.primary ? '600' : '400'};
+
   &:hover {
-    background: var(--color-2);
+    background: ${props => props.primary ? 'var(--color-1)' : 'var(--color-2)'};
+    color: ${props => props.primary ? 'white' : 'var(--color-1)'};
+    font-weight: ${props => props.primary ? '400' : '600'};
   }
 `

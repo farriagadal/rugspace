@@ -5,12 +5,14 @@ type ContainerProps = {
 }
 
 export const Container = styled.div<ContainerProps>`
-  margin-top: 44px;
+  margin-top: 0;
+  padding-top: ${props => props.isTop ? '45px' : '0'};
   position: sticky;
   top: 0;
   z-index: 111;
   background: var(--color-1);
   transition: background 0.2s ease-in-out;
+  box-shadow: -8px 5px 20px 0px var(--color-1);
 
   nav {
     align-items: flex-end;

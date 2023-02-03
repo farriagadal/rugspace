@@ -14,6 +14,20 @@ export const Container = styled.div`
   padding-bottom: 80px;
   border-top-left-radius: 125px;
   border-bottom-right-radius: 125px;
+  /* border-radius: 80px; */
+  /* animation: expand linear 12s;
+
+  @keyframes expand {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  } */
 
   &:before {
     content: '';
@@ -26,7 +40,7 @@ export const Container = styled.div`
     opacity: 0.9;
     border-top-left-radius: 125px;
     border-bottom-right-radius: 125px;
-
+    // border-radius: 80px;
   }
 
   @media only screen and (max-width: 765px) {
