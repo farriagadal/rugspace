@@ -22,4 +22,22 @@ export const Container = styled.div`
     border-radius: 9px;
     font-size: 25px;
   }
+
+  button {
+    margin: auto;
+    margin-top: 30px;
+
+    label {
+      display: flex;
+      align-items: center;
+    }
+  }
+`
+
+export const Img = styled.div`
+  display: flex;
+  img {
+    max-height: 400px;
+    margin: auto;
+  }
 `
