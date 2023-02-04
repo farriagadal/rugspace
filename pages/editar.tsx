@@ -11,7 +11,7 @@ export default function Home() {
         <meta name="description" content="Alfombras personalizadas" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Heading title="1. Escoge una imagen" />
+      <Heading title="2. Selecciona un tamaño" />
       <Tabs />
       <Footer padding="60px 0 150px 0"/>
     </>

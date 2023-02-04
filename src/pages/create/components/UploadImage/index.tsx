@@ -12,8 +12,9 @@ import { setUrl } from 'src/store/slices/image'
 
 const UploadImage = () => {
   const imageUpload = useSelector((state: any) => state.image)
+  console.log('imageUpload', imageUpload)
   const dispatch = useDispatch()
-  const [image, setImage] = useState(imageUpload.url || '')
+  const [image, setImage] = useState(imageUpload?.url || '')
   // const [image
   const [loading, setLoading] = useState(false)
 
