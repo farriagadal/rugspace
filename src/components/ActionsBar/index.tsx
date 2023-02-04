@@ -12,7 +12,7 @@ const ActionsBar = () => {
   return (
     <Container>
       <Button secondary> <ArrowBackIcon />Volver</Button>
-      <Button primary disabled={!image?.url} onClick={() => router.push('/editar')}>
+      <Button primary disabled={!image?.url} onClick={() => router.push('/medidas')}>
         <span>Continuar</span>
         <ArrowForwardIcon />
       </Button>
