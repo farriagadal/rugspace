@@ -1,21 +1,33 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import AvatarEditor from 'react-avatar-editor'
-import { useSelector } from 'react-redux'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { setUrlEdited } from 'src/store/slices/image'
+import Button from 'src/styled-components/Button'
+import { Container } from './styles'
 
 
 const ImageEditor = () => {
   const imageStore = useSelector((state: any) => state.image)
+  const dispatch = useDispatch()
   const editorRef = useRef<any>(null)
-
-  const [image, setImage] = useState<any>(imageStore.url)
+  const [image, setImage] = useState<any>(null)
   const [scale, setScale] = useState(1.0)
   const [rotate, setRotate] = useState(0)
 
   const handleEditorWheel = (e: any) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    document.querySelector('#image-editor').addEventListener('mousewheel', function(event) {
+      event.preventDefault()
+    }, { passive: false })
     e.preventDefault()
+    e.stopPropagation()
     setScale(prevScale => prevScale + (e.deltaY * 0.0003))
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    document.querySelector('#image-editor').removeEventListener('mousewheel', {})
+
   }
 
   const handleEditorTouchMove = (e: any) => {
@@ -40,36 +52,41 @@ const ImageEditor = () => {
   }
 
   const handleUpload = async () => {
-    const canvas: any = editorRef
-    canvas.crossOrigin = 'anonymous'
-    const dataURL = canvas.current.getImage().toDataURL('image/jpeg')
-    const formData = new FormData()
-    formData.append('file', dataURL)
-    formData.append('upload_preset', 'upload_dev')
-    const API_KEY = '946873127769385'
-  
-    try {
-      const res = await axios.post(
+    const canvasScaled = editorRef.current.getImageScaledToCanvas()
+    canvasScaled.toBlob(function(blob: any) {
+      const formData = new FormData()
+      formData.append('file', blob)
+      formData.append('upload_preset', 'upload_dev')
+      const API_KEY = '946873127769385'
+      axios.post(
         'https://api.cloudinary.com/v1_1/dxrtars4c/image/upload',
-        formData,
-        {
-          params: {
-            api_key: API_KEY,
-          },
-        }
-      )
-      console.log(res)
-    } catch (err) {
-      console.error(err)
-    }
+        formData, { params: { api_key: API_KEY }}
+      ).then((res) => {
+        dispatch(setUrlEdited(res.data?.secure_url))
+      }).catch((err) => {
+        console.error(err)
+      })
+    })
   }
 
-  console.log('rotate', rotate)
+  useEffect(() => {
+    async function fetchImage() {
+      const response = await fetch(imageStore.url)
+      const blob = await response.blob()
+      const objectURL = URL.createObjectURL(blob)
+      setImage(objectURL)
+    }
+    fetchImage()
+  }, [imageStore])
+
   return (
-    <div>
-      {image && (
+    <Container>
+      { image &&
         <AvatarEditor
           ref={editorRef}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          id='image-editor'
           image={image}
           width={1000}
           height={500}
@@ -80,13 +97,14 @@ const ImageEditor = () => {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           onWheel={handleEditorWheel}
+          onScroll={handleEditorWheel}
           onTouchMove={handleEditorTouchMove} // TODO: agregar soporte para touch
           onMouseDown={handleEditorMouseDown}
-          style={{ cursor: 'pointer', zIndex: 111, position: 'relative', pointerEvents: 'all' }}
+          style={{ cursor: 'pointer' }}
         />
-      )}
-      <button onClick={handleUpload}>Upload Image</button>
-    </div>
+      }
+      <Button primary onClick={handleUpload}>Guardar Cambios</Button>
+    </Container>
   )
 }
 
