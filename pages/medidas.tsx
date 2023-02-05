@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Footer from 'src/components/Footer'
-import Heading from 'src/pages/create/components/Heading'
+import Heading from 'src/components/Heading'
 import Tabs from 'src/pages/create/components/Tabs'
 
-export default function Home() {
+export default function Measures () {
   return (
     <>
       <Head>
