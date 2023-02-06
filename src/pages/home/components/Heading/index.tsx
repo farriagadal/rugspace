@@ -4,9 +4,11 @@ import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css'
 import { useState } from 'react'
 import Button from 'src/styled-components/Button'
+import { useRouter } from 'next/router'
 
 const Heading = () => {
   const [imageId, setImageId] = useState(0)
+  const router = useRouter()
 
   return (
     <>
@@ -29,7 +31,7 @@ const Heading = () => {
           <SplideSlide>
             <h1>Alfombras personalizadas</h1>
             <p>Lleva tu pasión por el anime y los juegos al siguiente nivel con nuestras alfombras personalizadas. Crea un diseño único y personalizado que refleje tu personalidad y tus intereses, ¡Perfecto para cualquier joven fanático!</p>
-            <Button>
+            <Button onClick={() => router.push('/crear')}>
               Crea tu diseño
             </Button>
           </SplideSlide>

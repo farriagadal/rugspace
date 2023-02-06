@@ -70,6 +70,8 @@ const ImageEditor = () => {
   }
 
   useEffect(() => {
+    console.log('imageStore', imageStore)
+
     async function fetchImage() {
       const response = await fetch(imageStore.url)
       const blob = await response.blob()
@@ -90,8 +92,9 @@ const ImageEditor = () => {
           image={image}
           width={1000}
           height={500}
-          border={50}
-          color={[255, 255, 255, 0.6]}
+          border={2}
+          color={[255, 199, 0, 1]}
+          background={[255, 255, 255, 1]}
           scale={scale}
           rotate={rotate}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment

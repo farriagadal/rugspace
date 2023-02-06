@@ -2,17 +2,21 @@ import { Container } from './styles'
 import Button from 'src/styled-components/Button'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
-const ActionsBar = () => {
+type ActionsBarProps = {
+  nextUrl: string
+  previousUrl?: string
+  canContinue: boolean
+}
+
+const ActionsBar = ({ nextUrl, previousUrl, canContinue }: ActionsBarProps) => {
   const router = useRouter()
-  const image = useSelector((state: any) => state.image)
 
   return (
     <Container>
-      <Button secondary> <ArrowBackIcon />Volver</Button>
-      <Button primary disabled={!image?.url} onClick={() => router.push('/medidas')}>
+      { previousUrl && <Button secondary> <ArrowBackIcon onClick={() => router.push(previousUrl)} />Volver</Button> }
+      <Button primary disabled={!canContinue} onClick={() => router.push(nextUrl)}>
         <span>Continuar</span>
         <ArrowForwardIcon />
       </Button>

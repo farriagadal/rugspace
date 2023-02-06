@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Pequeña",
+    "icon": "/icons/rug1.svg"
+  },
+  {
+    "id": 2,
+    "name": "Mediana",
+    "icon": "/icons/rug2.svg"
+  },
+  {
+    "id": 3,
+    "name": "Grande",
+    "icon": "/icons/rug3.svg"
+  }
+]

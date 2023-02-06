@@ -21,7 +21,6 @@ const Tabs = () => {
         { tab === 1 && <UploadImage /> }
         { tab === 2 && <ImageSearch /> }
       </Content>
-      <ActionsBar />
     </Container>
   )
 }

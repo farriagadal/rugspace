@@ -11,7 +11,8 @@ export const imageSlice = createSlice({
   name: 'image',
   initialState: {
     url: '',
-    urlEdited: ''
+    urlEdited: '',
+    sizeId: null,
   },
   reducers: {
     setUrl: (state, action) => {
@@ -19,6 +20,9 @@ export const imageSlice = createSlice({
     },
     setUrlEdited: (state, action) => {
       state.urlEdited = action.payload
+    },
+    setSize: (state, action) => {
+      state.sizeId = action.payload
     }
   }
 })
@@ -26,7 +30,7 @@ export const imageSlice = createSlice({
 const persistedImageSlice = persistReducer(persistConfig, imageSlice.reducer)
 
 
-export const { setUrl, setUrlEdited } = imageSlice.actions
+export const { setUrl, setUrlEdited, setSize } = imageSlice.actions
 
 
 export default persistedImageSlice
