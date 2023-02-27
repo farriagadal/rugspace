@@ -2,16 +2,22 @@
   {
     "id": 1,
     "name": "Pequeña",
-    "icon": "/icons/rug1.svg"
+    "icon": "/icons/rug1.svg",
+    "width": "90",
+    "height": "60"
   },
   {
     "id": 2,
     "name": "Mediana",
-    "icon": "/icons/rug2.svg"
+    "icon": "/icons/rug2.svg",
+    "width": "60",
+    "height": "60"
   },
   {
     "id": 3,
     "name": "Grande",
-    "icon": "/icons/rug3.svg"
+    "icon": "/icons/rug3.svg",
+    "width": "60",
+    "height": "20"
   }
 ]

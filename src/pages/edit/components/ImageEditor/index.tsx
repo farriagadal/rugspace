@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setUrlEdited } from 'src/store/slices/image'
 import Button from 'src/styled-components/Button'
 import { Container } from './styles'
+import sizes from 'data/sizes.json'
 
 
 const ImageEditor = () => {
@@ -14,6 +15,8 @@ const ImageEditor = () => {
   const [image, setImage] = useState<any>(null)
   const [scale, setScale] = useState(1.0)
   const [rotate, setRotate] = useState(0)
+  const [position, setPosition] = useState({ x: 0.5, y: 0.5 })
+  const [dragging, setDragging] = useState(false)
 
   const handleEditorWheel = (e: any) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -51,6 +54,30 @@ const ImageEditor = () => {
     document.removeEventListener('mouseup', handleEditorMouseUp)
   }
 
+
+  const handleMouseDown = (e: any) => {
+    e.preventDefault()
+    console.log('/////handleMouseDown////////')
+    setDragging(true)
+  }
+
+  const handleMouseUp = (e: any) => {
+    e.preventDefault()
+    console.log('////handleMouseUp/////////')
+    setDragging(false)
+  }
+
+  const handleMouseMove = (e: any) => {
+    e.preventDefault()
+    console.log('/////////////')
+    if (!dragging) return
+    console.log('/////////////')
+    const { x, y } = editorRef.current.getImage().getBoundingClientRect()
+    const newX = (e.clientX - x) / editorRef.current.getImage().width
+    const newY = (e.clientY - y) / editorRef.current.getImage().height
+    setPosition({ x: newX, y: newY })
+  }
+
   const handleUpload = async () => {
     const canvasScaled = editorRef.current.getImageScaledToCanvas()
     canvasScaled.toBlob(function(blob: any) {
@@ -67,6 +94,26 @@ const ImageEditor = () => {
         console.error(err)
       })
     })
+  }
+
+  const getSize = () => {
+    const size: any = sizes.find((s: any) => imageStore.sizeId === s.id)
+    const screenWidth = window.innerWidth
+    const screenHeight = window.innerHeight
+
+    const relation = size.width / size.height
+    if (relation > 0.7) {
+      return {
+        width: 1000,
+        height: screenWidth / relation
+      }
+    }
+    if (relation > 0.5) {
+      return {
+        width: screenHeight * relation,
+        height: screenHeight
+      }
+    }
   }
 
   useEffect(() => {
@@ -97,6 +144,14 @@ const ImageEditor = () => {
           background={[255, 255, 255, 1]}
           scale={scale}
           rotate={rotate}
+
+          position={position}
+          // onMouseDown={handleMouseDown}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           onWheel={handleEditorWheel}
